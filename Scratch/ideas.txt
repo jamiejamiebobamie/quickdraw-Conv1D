@@ -1,0 +1,90 @@
+
+curses and enchantments -> spell slots that hold curses and enchantments are converted to placeholders for the enchantment/curse after being cast.
+                        -> after enchantment / curse has ended (time frame), the spell slot is converted back to castable spell
+                        -> GAMEPLAY: enchantments and curses take-up spell slots and reduce the number of spells you can cast while active
+
+- NONE
+    - multi-storable
+    - un-removable: one spell slot (the first) is always taken-up by this
+    - "free cast": draw doodle, run inference. 
+                  if player knows drawn label, spell slot is taken-up by spell or spell is cast (non-storable spells).
+                  if free cast spell slot is the first spell slot and the spell is storable, the spell is consumed after the first cast.
+
+- line
+    - storable
+    - "find scroll": cast to enter track-spell-scroll mode: allows player to find the nearest spell scroll in level
+
+- circle
+    - storable
+    - "cone of cold": dmg in cone, slow movement
+
+- square
+    - storable
+    - "fireball": dmg missile w/ splash dmg
+
+- triangle
+    - storable
+    - "chain lightning": dmg missile w/ missiles that shoot between successive targets in proximity (decrement 3-0)
+
+- moon
+    - curse, ends after time x passes.
+    - storable
+    - "sleep": send out magic missile. if it hits enemy caster, enemy is cursed with sleep.
+
+- broom
+    - storable
+    - "witch's broom": ride your staff in the direction of w-a-s-d. (charge)
+
+- feather
+    - storable
+    - enchantment, ends after time x passes.
+    - "slowfall": no damage from falls
+
+- mushroom
+    - storable
+    - "alchemy": convert level's mushroonms to health potions
+
+- key
+    - enchantment, ends after time x passes.
+    - multi-storable
+    - "lock": in front of you, draw a plane that is perpendicular. size of plane -> health of barrier (smaller = more health). no one can pass the barrier until is damaged fully or enchantment is cancelled. cast in doorways for a strong lock.
+
+- door
+    - non-storable (must draw)
+    - "gate": enter static mesh. w-a-s-d leave through exit of your choice (1 of 4): faces of the mesh
+
+- bat
+    - storable
+    - "vampiric siphon": dmg, shoot a beam that drains health from target and gives it to the caster.
+
+- mouth
+    - curse, ends after time x passes.
+    - storable
+    - "silence": send out magic missile. if it hits enemy caster, enemy is cursed with "silence" and cannot cast until curse ends (time).
+
+- star
+    - non-storable (must draw)
+    - "astral": enter astral projection mode. leave body behind, become invisible specter, can move through static meshes in level, can still be damaged, player levitates, player can see all spell scrolls in level, player can cast spells, but does not regain mana. player is visible for x seconds after casting, but then goes back to invisible
+
+
+
+'hourglass': 6
+'lightning': 8
+'tornado': 18
+'knee': 24
+'axe': 20
+'castle': 21
+'diamond': 23
+
+'hexagon': 5
+'octagon': 12
+
+'octopus': 13
+'snake': 14
+
+'streetlight': 17
+'cloud': 22
+'stairs': 27
+
+'squiggle': 26
+'zigzag': 28
