@@ -67,6 +67,12 @@ curses and enchantments -> spell slots that hold curses and enchantments are con
     - "astral": enter astral projection mode. leave body behind, become invisible specter, can move through static meshes in level, can still be damaged, player levitates, player can see all spell scrolls in level, player can cast spells, but does not regain mana. player is visible for x seconds after casting, but then goes back to invisible
 
 
+- need walk speed increase enchantment
+- need jump z increase enchantment
+- need "prop hunt" / camo enchantment
+- want summon minion enchantment
+- want charm minion curse
+
 
 'hourglass': 6
 'lightning': 8
