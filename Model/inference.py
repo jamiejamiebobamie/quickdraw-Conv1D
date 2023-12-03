@@ -17,27 +17,21 @@ import matplotlib.pyplot as plt
 # labels = {'circle': 109333, 'bat': 10109, 'broom': 18180, 'door': 10784, 'feather': 9941, 'hexagon': 93543, 'hourglass': 41390, 'key': 27323, 'lightning': 84117, 'moon': 72575, 'mouth': 16476, 'mushroom': 30706, 'octagon': 89629, 'octopus': 8060, 'snake': 38486, 'square': 95601, 'star': 104394, 'streetlight': 27011, 'triangle': 90015, 'tornado': 6620, 'axe': 13309, 'castle': 20051, 'cloud': 40810, 'diamond': 35501, 'knee': 83030, 'line': 126574, 'squiggle': 74207, 'stairs': 102788, 'zigzag': 104508}
 # labels = {'circle': 109333, 'bat': 10109, 'broom': 18180, 'door': 10784, 'feather': 9941, 'hexagon': 93543, 'hourglass': 41390, 'key': 27323, 'lightning': 84117, 'moon': 72575, 'mouth': 16476, 'mushroom': 30706, 'octagon': 89629, 'octopus': 8060, 'snake': 38486, 'square': 95601, 'star': 104394, 'streetlight': 27011, 'triangle': 90015, 'tornado': 6620, 'axe': 13309, 'castle': 20051, 'cloud': 40810, 'diamond': 35501, 'knee': 83030, 'line': 126574, 'squiggle': 74207, 'stairs': 102788, 'zigzag': 104508}
 # labels = {'bat': 0, 'broom': 1, 'circle': 2, 'door': 3, 'hourglass': 4, 'lightning': 5, 'moon': 6, 'mushroom': 7, 'snake': 8, 'square': 9, 'star': 10, 'streetlight': 11, 'tornado': 12, 'triangle': 13, 'cloud': 14, 'diamond': 15, 'line': 16, 'zigzag': 17}
-# label_i = 0
+# labels = {0: 'circle', 1: 'door', 2: 'hourglass', 3: 'lightning', 4: 'moon', 5: 'mushroom', 6: 'square', 7: 'star', 8: 'tornado', 9: 'triangle', 10: 'diamond', 11: 'line'}
 
 desired_labels = {
-'bat': True, 
-'broom': True,
 'circle': True,
-'cloud': True,
-'diamond': True,
 'door': True,
 'hourglass': True,
 'lightning': True,
-'line': True,
 'moon': True,
 'mushroom': True,
-'snake': True,
 'square': True,
 'star': True,
-'streetlight': True,
 'tornado': True,
 'triangle': True,
-'zigzag': True
+'diamond': True,
+'line': True
 }
 
 cwd = os.getcwd()
@@ -75,7 +69,7 @@ with open(file, "r") as f:
                 j = label_to_i[label]
             y.append(j)
 
-file = os.path.join(cwd, "Model\Pickled\model3.pkl")
+file = os.path.join(cwd, "Model\Pickled\model4.pkl")
 with open(file, 'rb') as f:
     model = pickle.load(f)
 
@@ -91,40 +85,38 @@ print(label_to_i)
 print(i_to_label)
 print("guess: " + i_to_label[np.argmax(y_pred, axis=1)[0]])
 print("actual: " + i_to_label[y_test[0]])
-
-
 print(X_test[0])
 
-# per_class_accuracies = {}
+per_class_accuracies = {}
 
-# # Calculate the accuracy for each one of our classes
-# for idx, cls in enumerate(label_to_i):
-#     # True negatives are all the samples that are not our current GT class (not the current row) 
-#     # and were not predicted as the current class (not the current column)
-#     true_negatives = np.sum(np.delete(np.delete(cm, idx, axis=0), idx, axis=1))
+# Calculate the accuracy for each one of our classes
+for idx, cls in enumerate(label_to_i):
+    # True negatives are all the samples that are not our current GT class (not the current row) 
+    # and were not predicted as the current class (not the current column)
+    true_negatives = np.sum(np.delete(np.delete(cm, idx, axis=0), idx, axis=1))
     
-#     # True positives are all the samples of our current GT class that were predicted as such
-#     true_positives = cm[idx, idx]
+    # True positives are all the samples of our current GT class that were predicted as such
+    true_positives = cm[idx, idx]
     
-#     # The accuracy for the current class is the ratio between correct predictions to all predictions
-#     per_class_accuracies[cls] = (true_positives + true_negatives) / np.sum(cm)
+    # The accuracy for the current class is the ratio between correct predictions to all predictions
+    per_class_accuracies[cls] = (true_positives + true_negatives) / np.sum(cm)
 
-# print(per_class_accuracies)
-# # {'bat': 0.9982832246063492, 'broom': 0.9963523302326441, 'circle': 0.981653954414324, 'door': 0.9969475300164858, 'feather': 0.9979155262388153, 'hexagon': 0.9668676368720531, 'hourglass': 0.9983405779045781, 'key': 0.9976580736556546, 'lightning': 0.9888543423775237, 'moon': 0.9897363086525097, 'mouth': 0.9989255815465126, 'mushroom': 0.9989096500747823, 'octagon': 0.9641784044439885, 'octopus': 0.9994404867128339, 'snake': 0.9913619560278635, 'square': 0.9944023180928626, 'star': 0.9985190103879569, 'streetlight': 0.9978040059367036, 'tornado': 0.9989077382981747, 'triangle': 0.998066556590818, 'axe': 0.9974273859450007, 'castle': 0.998923669769905, 'cloud': 0.9969965989494151, 'diamond': 0.9974694450303686, 'knee': 0.9889926275521421, 'line': 0.9921375000716917, 'squiggle': 0.9789825652345973, 'stairs': 0.9953868830457915, 'zigzag': 0.9840812734471435}
+print(per_class_accuracies)
+# {'bat': 0.9982832246063492, 'broom': 0.9963523302326441, 'circle': 0.981653954414324, 'door': 0.9969475300164858, 'feather': 0.9979155262388153, 'hexagon': 0.9668676368720531, 'hourglass': 0.9983405779045781, 'key': 0.9976580736556546, 'lightning': 0.9888543423775237, 'moon': 0.9897363086525097, 'mouth': 0.9989255815465126, 'mushroom': 0.9989096500747823, 'octagon': 0.9641784044439885, 'octopus': 0.9994404867128339, 'snake': 0.9913619560278635, 'square': 0.9944023180928626, 'star': 0.9985190103879569, 'streetlight': 0.9978040059367036, 'tornado': 0.9989077382981747, 'triangle': 0.998066556590818, 'axe': 0.9974273859450007, 'castle': 0.998923669769905, 'cloud': 0.9969965989494151, 'diamond': 0.9974694450303686, 'knee': 0.9889926275521421, 'line': 0.9921375000716917, 'squiggle': 0.9789825652345973, 'stairs': 0.9953868830457915, 'zigzag': 0.9840812734471435}
 
-# # disp is the ConfusionMatrixDisplay object
-# disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[k for k in label_to_i])
+# disp is the ConfusionMatrixDisplay object
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[k for k in label_to_i])
 
-# # print(len(cm), len(labels))
+# print(len(cm), len(labels))
 
-# # plot the confusion matrix
-# # disp.plot()
+# plot the confusion matrix
+# disp.plot()
 
-# fig, ax = plt.subplots(figsize=(20,20))
-# disp.plot(ax=ax)
+fig, ax = plt.subplots(figsize=(20,20))
+disp.plot(ax=ax)
 
 # show the plot
-# plt.show()
+plt.show()
 
 
 
@@ -139,7 +131,7 @@ print(X_test[0])
 # predictions = [np.argmax(p) for p in predictions]
 # predictions = [True if predictions[i] == y_train[i] else False for i in range(len(predictions))]
 # correct = filter(lambda x: x != False, predictions)
-# print(len([c for c in correct]) / num_predict) # 0.885
+# print(len([c for c in correct]) / num_predict)
 # # ---
 
 # # ---
@@ -167,5 +159,3 @@ print(X_test[0])
 # ## ----
 
 # # print(model.summary())
-
-# circle, bat, broom, door, feather, hexagon, hourglass, key, lightning, moon, mouth, mushroom, octagon, octopus, snake, square, star, streetlight, triangle, tornado, axe, castle, cloud, diamond, knee, line, skull, squiggle, stairs, zigzig
