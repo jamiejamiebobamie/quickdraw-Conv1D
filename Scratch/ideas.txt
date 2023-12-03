@@ -1,3 +1,5 @@
+***********************************
+ONE 
 
 curses and enchantments -> spell slots that hold curses and enchantments are converted to placeholders for the enchantment/curse after being cast.
                         -> after enchantment / curse has ended (time frame), the spell slot is converted back to castable spell
@@ -94,3 +96,46 @@ curses and enchantments -> spell slots that hold curses and enchantments are con
 
 'squiggle': 26
 'zigzag': 28
+
+
+***********************************
+TWO
+
+bat 
+broom
+circle
+cloud
+diamond
+door
+hourglass
+lightning
+line
+moon
+mushroom
+snake
+square
+star
+streetlight
+tornado
+triangle
+zigzag
+
+# 29 {'bat': 0, 'broom': 1, 'circle': 2, 'door': 3, 'feather': 4, 'hexagon': 5, 'hourglass': 6, 'key': 7, 'lightning': 8, 'moon': 9, 'mouth': 10, 'mushroom': 11, 'octagon': 12, 'octopus': 13, 'snake': 14, 'square': 15, 'star': 16, 'streetlight': 17, 'tornado': 18, 'triangle': 19, 'axe': 20, 'castle': 21, 'cloud': 22, 'diamond': 23, 'knee': 24, 'line': 25, 'squiggle': 26, 'stairs': 27, 'zigzag': 28}
+
+***********************************
+THREE
+
+circle
+door
+hourglass
+lightning
+moon
+mushroom
+square
+star
+tornado
+triangle
+diamond
+line
+
+labels = {0: 'bat', 1: 'broom', 2: 'circle', 3: 'door', 4: 'hourglass', 5: 'lightning', 6: 'moon', 7: 'mushroom', 8: 'snake', 9: 'square', 10: 'star', 11: 'streetlight', 12: 'tornado', 13: 'triangle', 14: 'cloud', 15: 'diamond', 16: 'line', 17: 'zigzag'}

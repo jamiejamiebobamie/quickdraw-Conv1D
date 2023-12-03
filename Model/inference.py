@@ -16,8 +16,29 @@ import matplotlib.pyplot as plt
 # labels = {'bat': 0, 'brain': 1, 'broom': 2, 'fire': 3, 'circle': 4, 'door': 5, 'feather': 6, 'frog': 7, 'hexagon': 8, 'hourglass': 9, 'hurricane': 10, 'key': 11, 'lightning': 12, 'moon': 13, 'mouth': 14, 'mushroom': 15, 'octagon': 16, 'octopus': 17, 'snake': 18, 'snowflake': 19, 'square': 20, 'star': 21, 'streetlight': 22, 'tornado': 23, 'triangle': 24, 'axe': 25, 'castle': 26, 'cloud': 27, 'diamond': 28, 'dragon': 29, 'knee': 30, 'line': 31, 'skull': 32, 'squiggle': 33, 'stairs': 34, 'stitches': 35, 'zigzag': 36}
 # labels = {'circle': 109333, 'bat': 10109, 'broom': 18180, 'door': 10784, 'feather': 9941, 'hexagon': 93543, 'hourglass': 41390, 'key': 27323, 'lightning': 84117, 'moon': 72575, 'mouth': 16476, 'mushroom': 30706, 'octagon': 89629, 'octopus': 8060, 'snake': 38486, 'square': 95601, 'star': 104394, 'streetlight': 27011, 'triangle': 90015, 'tornado': 6620, 'axe': 13309, 'castle': 20051, 'cloud': 40810, 'diamond': 35501, 'knee': 83030, 'line': 126574, 'squiggle': 74207, 'stairs': 102788, 'zigzag': 104508}
 # labels = {'circle': 109333, 'bat': 10109, 'broom': 18180, 'door': 10784, 'feather': 9941, 'hexagon': 93543, 'hourglass': 41390, 'key': 27323, 'lightning': 84117, 'moon': 72575, 'mouth': 16476, 'mushroom': 30706, 'octagon': 89629, 'octopus': 8060, 'snake': 38486, 'square': 95601, 'star': 104394, 'streetlight': 27011, 'triangle': 90015, 'tornado': 6620, 'axe': 13309, 'castle': 20051, 'cloud': 40810, 'diamond': 35501, 'knee': 83030, 'line': 126574, 'squiggle': 74207, 'stairs': 102788, 'zigzag': 104508}
-
+# labels = {'bat': 0, 'broom': 1, 'circle': 2, 'door': 3, 'hourglass': 4, 'lightning': 5, 'moon': 6, 'mushroom': 7, 'snake': 8, 'square': 9, 'star': 10, 'streetlight': 11, 'tornado': 12, 'triangle': 13, 'cloud': 14, 'diamond': 15, 'line': 16, 'zigzag': 17}
 # label_i = 0
+
+desired_labels = {
+'bat': True, 
+'broom': True,
+'circle': True,
+'cloud': True,
+'diamond': True,
+'door': True,
+'hourglass': True,
+'lightning': True,
+'line': True,
+'moon': True,
+'mushroom': True,
+'snake': True,
+'square': True,
+'star': True,
+'streetlight': True,
+'tornado': True,
+'triangle': True,
+'zigzag': True
+}
 
 cwd = os.getcwd()
 file = os.path.join(cwd, "Dataset/one_line_drawings_pruned.ndjson")
@@ -33,27 +54,28 @@ with open(file, "r") as f:
     for line in f:
         line = json.loads(line)
         label = line["word"]
-        stroke = np.zeros((max_points, 2)) # [[x,y], ...]
-        x_stroke = np.asarray(line["drawing"][0][0])
-        y_stroke = np.asarray(line["drawing"][0][1]) 
-        f_data = [[x_stroke[i], y_stroke[i]] for i in range(len(x_stroke))]
-        stroke[:len(f_data)] = f_data
-        stroke /= 255
-        X.append(stroke)
-        if not len(label_to_i):         # first record
-            label_to_i[label] = label_i
-            i_to_label[label_i] = label
-            j = label_i
-        elif label not in label_to_i:   # new record
-            label_i += 1
-            label_to_i[label] = label_i
-            i_to_label[label_i] = label
-            j = label_i
-        else:                           # old record
-            j = label_to_i[label]
-        y.append(j)
+        if label in desired_labels:
+            stroke = np.zeros((max_points, 2)) # [[x,y], ...]
+            x_stroke = np.asarray(line["drawing"][0][0])
+            y_stroke = np.asarray(line["drawing"][0][1]) 
+            f_data = [[x_stroke[i], y_stroke[i]] for i in range(len(x_stroke))]
+            stroke[:len(f_data)] = f_data
+            stroke /= 255
+            X.append(stroke)
+            if not len(label_to_i):         # first record
+                label_to_i[label] = label_i
+                i_to_label[label_i] = label
+                j = label_i
+            elif label not in label_to_i:   # new record
+                label_i += 1
+                label_to_i[label] = label_i
+                i_to_label[label_i] = label
+                j = label_i
+            else:                           # old record
+                j = label_to_i[label]
+            y.append(j)
 
-file = os.path.join(cwd, "Model\Pickled\model2.pkl")
+file = os.path.join(cwd, "Model\Pickled\model3.pkl")
 with open(file, 'rb') as f:
     model = pickle.load(f)
 
@@ -64,8 +86,10 @@ predictions = []
 y_pred = model.predict(np.asarray(X_test))
 cm = confusion_matrix(np.asarray(y_test), np.argmax(y_pred, axis=1))
 
+# {'bat': 0, 'broom': 1, 'circle': 2, 'door': 3, 'hourglass': 4, 'lightning': 5, 'moon': 6, 'mushroom': 7, 'snake': 8, 'square': 9, 'star': 10, 'streetlight': 11, 'tornado': 12, 'triangle': 13, 'cloud': 14, 'diamond': 15, 'line': 16, 'zigzag': 17}
 print(label_to_i)
 print(i_to_label)
+print("guess: " + i_to_label[np.argmax(y_pred, axis=1)[0]])
 print("actual: " + i_to_label[y_test[0]])
 
 
@@ -142,6 +166,6 @@ print(X_test[0])
 # print(i)
 # ## ----
 
-# # print(model.summary()) # 88% accuracy
+# # print(model.summary())
 
 # circle, bat, broom, door, feather, hexagon, hourglass, key, lightning, moon, mouth, mushroom, octagon, octopus, snake, square, star, streetlight, triangle, tornado, axe, castle, cloud, diamond, knee, line, skull, squiggle, stairs, zigzig
