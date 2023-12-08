@@ -21,17 +21,13 @@ import matplotlib.pyplot as plt
 
 desired_labels = {
 'circle': True,
-'door': True,
-'hourglass': True,
-'lightning': True,
-'moon': True,
-'mushroom': True,
-'square': True,
-'star': True,
-'tornado': True,
-'triangle': True,
 'diamond': True,
-'line': True
+'door': True,
+'line': True,
+'square': True,
+'squiggle': True,
+'star': True,
+'triangle': True
 }
 
 cwd = os.getcwd()
@@ -69,18 +65,15 @@ with open(file, "r") as f:
                 j = label_to_i[label]
             y.append(j)
 
-file = os.path.join(cwd, "Model\Pickled\model4.pkl")
+file = os.path.join(cwd, "Model\Pickled\model6.pkl")
 with open(file, 'rb') as f:
     model = pickle.load(f)
-
-# print(model.summary())
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1, stratify=y)
 predictions = []
 y_pred = model.predict(np.asarray(X_test))
 cm = confusion_matrix(np.asarray(y_test), np.argmax(y_pred, axis=1))
 
-# {'bat': 0, 'broom': 1, 'circle': 2, 'door': 3, 'hourglass': 4, 'lightning': 5, 'moon': 6, 'mushroom': 7, 'snake': 8, 'square': 9, 'star': 10, 'streetlight': 11, 'tornado': 12, 'triangle': 13, 'cloud': 14, 'diamond': 15, 'line': 16, 'zigzag': 17}
 print(label_to_i)
 print(i_to_label)
 print("guess: " + i_to_label[np.argmax(y_pred, axis=1)[0]])

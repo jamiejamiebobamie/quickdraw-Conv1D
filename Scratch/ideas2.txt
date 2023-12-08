@@ -1,0 +1,37 @@
+***********************************
+
+- circle
+    - bubble: upwards gravity. small, fall damage, when popped. easier to push heavier enemies with line
+    - fireball
+    - circle of fire
+
+- diamond
+    - conjure clod of sod suspended above the head of enemy drawn over.
+
+- door
+    - "gate": enter static mesh. w-a-s-d leave through exit of your choice (1 of 4): faces of the mesh
+
+- hourglass
+    - slow enemies in cone. raycast from player camera "through" hourglass points
+
+- line
+    - push in direction
+    - cut
+    - trail of fire
+
+- triangle
+    - create shield. triangular faces of a prismatic orb, constructed one by one. health of shield = # of triangles up to max
+
+- square
+    - create barrier. size of barrier = health. larger barriers = easily destroyed.
+
+- star
+    - reflect spell (all?). requires small delay w/ other spells after user casts
+
+***********************************
+
+- need walk speed increase enchantment
+- need jump z increase enchantment
+- need "prop hunt" / camo enchantment
+- want summon minion enchantment
+- want charm minion curse
