@@ -15,7 +15,7 @@ import onnxruntime as rt
 
 cwd = os.getcwd()
 
-file = os.path.join(cwd, "Model\Pickled\model6.pkl")
+file = os.path.join(cwd, "Model\Pickled\model7.pkl")
 with open(file, 'rb') as f:
     model = pickle.load(f)
 
@@ -28,7 +28,7 @@ output_names = [n.name for n in model_proto.graph.output]
 providers = ['CPUExecutionProvider']
 m = rt.InferenceSession(output_path, providers=providers)
 
-# 5 diamond
+# 2 diamond
 test_sample = np.asarray([
 [[0.3254902,  0.01568627],
  [0.30588235, 0.08235294],
@@ -72,6 +72,7 @@ test_sample = np.asarray([
  [0.0,         0.0        ]]], dtype=np.float32)
 
 onnx_pred = m.run(output_names, {"input": test_sample})
-labels = {0: 'circle', 1: 'door', 2: 'square', 3: 'star', 4: 'triangle', 5: 'diamond', 6: 'line', 7: 'squiggle'}
+labels = {0: 'circle', 1: 'star', 2: 'diamond', 3: 'line', 4: 'squiggle'}
+
 print('ONNX Predicted:', onnx_pred[0])
 print(labels[np.argmax(onnx_pred[0])])

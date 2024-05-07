@@ -22,12 +22,12 @@ import matplotlib.pyplot as plt
 desired_labels = {
 'circle': True,
 'diamond': True,
-'door': True,
+# 'door': True,
 'line': True,
-'square': True,
+# 'square': True,
 'squiggle': True,
 'star': True,
-'triangle': True
+# 'triangle': True
 }
 
 cwd = os.getcwd()
@@ -65,7 +65,7 @@ with open(file, "r") as f:
                 j = label_to_i[label]
             y.append(j)
 
-file = os.path.join(cwd, "Model\Pickled\model6.pkl")
+file = os.path.join(cwd, "Model\Pickled\model7.pkl")
 with open(file, 'rb') as f:
     model = pickle.load(f)
 

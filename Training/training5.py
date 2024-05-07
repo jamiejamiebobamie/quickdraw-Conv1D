@@ -21,12 +21,12 @@ max_points = 40 # max number of points in a stroke
 desired_labels = {
 'circle': True,
 'diamond': True,
-'door': True,
+# 'door': True,
 'line': True,
-'square': True,
+# 'square': True,
 'squiggle': True,
 'star': True,
-'triangle': True
+# 'triangle': True
 }
 
 with open(file, "r") as f:
